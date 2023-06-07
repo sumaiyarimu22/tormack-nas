@@ -21,9 +21,55 @@ const userSchema = new mongoose.Schema({
     typr: "String",
     required: true,
   },
-  IpAddress: {
+  ipAddress: {
     typr: "String",
     required: true,
   },
 });
+
+//static signup method
+userSchema.static.signup = async function (
+  /*function expression supports this key word */
+  name,
+  username,
+  email,
+  password,
+  ipAddress
+) {
+  //validation
+  if (!name || !username || !email || !password || !ipAddress) {
+    throw Error("All fiels must be filled");
+  }
+
+  if (!validator.isEmail(email)) {
+    throw Error("Invalid email");
+  }
+
+  if (!validator.isStrongPassword(password)) {
+    throw Error(
+      "Password is not Strong .must be used 8+ chars with uppercase, lowercase, number and symbol"
+    );
+  }
+
+  const existeEmail = await this.findOne({ email });
+  if (existeEmail) {
+    throw Error("Email already in use");
+  }
+
+  //hasing password
+  const salt = await bcrypt.genSalt(10);
+  const hashPass = await bcrypt.hash(password, salt);
+
+  //creating user
+  const user = await this.create({
+    name,
+    username,
+    email,
+    password: hashPass,
+    ipAddress,
+  });
+
+  return user;
+};
+
 module.exports = mongoose.model("User", userSchema);
