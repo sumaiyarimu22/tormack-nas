@@ -1,2 +1,4 @@
 db connextion
 Model Folder A user model is created
+create static signup, login method
+user controllers
