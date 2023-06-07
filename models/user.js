@@ -72,4 +72,25 @@ userSchema.static.signup = async function (
   return user;
 };
 
+//static login method
+
+userSchema.static.login = async function (email, password, ipAddress) {
+  if (!email || !password || !ipAddress) {
+    throw Error("All fiels must be filled");
+  }
+
+  const user = await this.findOne({ email, ipAddress });
+  if (!user) {
+    throw Error("Incorrect email or restricted ip address.");
+  }
+  //comparing password
+  const match = await bcrypt.compare(password, user.password);
+
+  if (!match) {
+    throw Error("Incorrect password");
+  }
+
+  return user;
+};
+
 module.exports = mongoose.model("User", userSchema);
