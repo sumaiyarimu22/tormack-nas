@@ -1,4 +1,11 @@
-db connextion
-Model Folder A user model is created
-create static signup, login method
-user controllers
+### db connextion
+
+### Model Folder A user model is created
+
+### create static signup, login method
+
+### user controllers
+
+### create routes
+
+### middleware create for user varify

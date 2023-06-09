@@ -4,31 +4,31 @@ const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
   name: {
-    typr: "String",
+    type: String,
     required: true,
   },
   username: {
-    typr: "String",
+    type: String,
     required: true,
     unique: true,
   },
   email: {
-    typr: "String",
+    type: String,
     required: true,
     unique: true,
   },
   password: {
-    typr: "String",
+    type: String,
     required: true,
   },
   ipAddress: {
-    typr: "String",
+    type: String,
     required: true,
   },
 });
 
 //static signup method
-userSchema.static.signup = async function (
+userSchema.statics.signup = async function (
   /*function expression supports this key word */
   name,
   username,
@@ -42,7 +42,7 @@ userSchema.static.signup = async function (
   }
 
   if (!validator.isEmail(email)) {
-    throw Error("Invalid email");
+    throw Error("Invalid email.");
   }
 
   if (!validator.isStrongPassword(password)) {
@@ -74,7 +74,7 @@ userSchema.static.signup = async function (
 
 //static login method
 
-userSchema.static.login = async function (email, password, ipAddress) {
+userSchema.statics.login = async function (email, password, ipAddress) {
   if (!email || !password || !ipAddress) {
     throw Error("All fiels must be filled");
   }
