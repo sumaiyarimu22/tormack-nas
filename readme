@@ -9,3 +9,7 @@
 ### create routes
 
 ### middleware create for user varify
+
+### create routes [get all users,get an user,update an user,delete an user]
+
+#### admin = get all users = middlewares -> adminMiddlewars
