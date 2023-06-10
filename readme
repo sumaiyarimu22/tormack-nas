@@ -13,3 +13,5 @@
 ### create routes [get all users,get an user,update an user,delete an user]
 
 #### admin = get all users = middlewares -> adminMiddlewars
+
+### create device model then controler funcation then create route then index.js create a route
